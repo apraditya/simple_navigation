@@ -74,7 +74,10 @@ module SimpleNavigation
           title = menu[:name].to_s.titleize
         end
       end
-      title = link_to(title, url_for(menu[:url])) if menu.has_key?(:url)
+      if menu.has_key?(:url)
+        title = (menu[:url].has_key?(:other_options))? link_to(title, url_for(menu[:url]), menu[:url][:other_options]) : link_to(title, url_for(menu[:url]))
+        
+      end
       title
     end # render_menu_title(menu)
 
